@@ -1,5 +1,5 @@
 from django.shortcuts import render,HttpResponsePermanentRedirect
-from .forms import SignUpForm
+from .forms import SignUpForm, LoginForm
 # Create your views here.
 def home(request):
     return render(request,'blog/home.html')
@@ -22,4 +22,5 @@ def user_signup(request):
     return render(request,'blog/signup.html',{'form':form})
 
 def user_login(request):
-    return render(request,'blog/login.html')
+    form = LoginForm()
+    return render(request,'blog/login.html',{'form':form})
