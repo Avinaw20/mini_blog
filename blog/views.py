@@ -33,7 +33,8 @@ def user_signup(request):
         if form.is_valid():
             messages.success(request,'Congratulations !! You have become an Author.')
             user = form.save()
-            
+            group = Group.objects.get(name='Author')
+            user.groups.add(group)
     else :
         form = SignUpForm()
     return render(request,'blog/signup.html',{'form':form})
