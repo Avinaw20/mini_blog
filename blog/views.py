@@ -4,6 +4,9 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login,logout
 from .models import Post
 from django.contrib.auth.models import Group
+from django.http import HttpResponsePermanentRedirect
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
 def home(request):
     posts = Post.objects.all()
@@ -19,9 +22,13 @@ def contact(request):
 def dashboard(request):
     if request.user.is_authenticated:
         posts = Post.objects.all()
-        return render(request,'blog/dashboard.html',{'posts':posts})
+        user = request.user
+        full_name = user.get_full_name()
+        gps = user.groups.all()
+        return render(request, 'blog/dashboard.html', {'posts': posts, 'full_name': full_name, 'groups': gps})
     else:
         return HttpResponsePermanentRedirect('/login/')
+
 
 def user_logout(request):
     logout(request)
@@ -69,8 +76,8 @@ def add_post(request):
                 desc = form.cleaned_data['desc']
                 pst = Post(title=title, desc=desc)
                 pst.save()
+                messages.success(request,'Your Blog Submitted')
                 form = PostForm()  # Reset the form after saving the post
-
         return render(request, 'blog/addpost.html', {'form': form})
     else:
         return HttpResponsePermanentRedirect('/login/')
