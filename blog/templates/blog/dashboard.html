@@ -46,10 +46,12 @@
                         <a href="{% url 'updatepost' post.id %}" class="btn btn-warning btn-sm">
                             Edit
                         </a>
+                        {% if perms.blog.delete_post %}
                         <form action="{% url 'deletepost' post.id %}" method="POST" class="d-inline">
                             {% csrf_token %}
                             <input type="submit" value="Delete" class="btn btn-danger btn-sm">
                         </form>
+                        {% endif %}
                     </td>
                 </tr>
             {% endfor %}
