@@ -76,7 +76,7 @@ WSGI_APPLICATION = 'miniblog.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-'default': dj_database_url.parse("postgres://mini_blog_gntb_user:LZi5RiVQhLBvZ0tFt3ITWdMkUuAbTo2U@dpg-cjhoovt1a6cs73el7ckg-a/mini_blog_gntb")
+'default': dj_database_url.parse("postgres://mini_blog_gntb_user:LZi5RiVQhLBvZ0tFt3ITWdMkUuAbTo2U@dpg-cjhoovt1a6cs73el7ckg-a.singapore-postgres.render.com/mini_blog_gntb")
 }
 
 # Password validation
